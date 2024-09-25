@@ -1,0 +1,23 @@
+
+name: DO Container Scan (SANITY)
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  accuknox-cicd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main  
+     
+      - name: Run AccuKnox CSPM Scan
+        uses: accuknox/container-scan-action@v0.0.1
+        with:
+          endpoint: ${{ secrets.DO_ENDPOINT }}
+          token: ${{ secrets.DO_TOKEN }} 
+          tenant_id: ${{ secrets.DO_TENANT_ID }}
+          repository_name: ${{ github.repository }}
