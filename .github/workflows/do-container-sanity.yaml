@@ -2,13 +2,10 @@
 name: DO Container Scan (SANITY)
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
 
 jobs:
-  accuknox-cicd:
+  juice-do-sanity:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,3 +18,4 @@ jobs:
           token: ${{ secrets.DO_TOKEN }} 
           tenant_id: ${{ secrets.DO_TENANT_ID }}
           repository_name: ${{ github.repository }}
+          
