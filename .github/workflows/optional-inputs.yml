@@ -1,0 +1,23 @@
+name: DO Container Optional
+
+on:
+  workflow_dispatch:
+
+jobs:
+  juice-do-optional:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main  
+     
+      - name: Run AccuKnox CSPM Scan
+        uses: accuknox/container-scan-action@v0.0.1
+        with:
+          endpoint: ${{ secrets.DO_ENDPOINT }}
+          token: ${{ secrets.DO_TOKEN }} 
+          tenant_id: ${{ secrets.DO_TENANT_ID }}
+          repository_name: ${{ github.repository }}
+          dockerfile_context: Dockerfile.rename
+          tag: do-cicd
+          severity: UNKNOWN, CRITICAL
+          exit_code: 0
