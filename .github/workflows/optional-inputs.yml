@@ -19,5 +19,5 @@ jobs:
           repository_name: ${{ github.repository }}
           dockerfile_context: Dockerfile.rename
           tag: do-cicd
-          severity: UNKNOWN, CRITICAL
+          severity: UNKNOWN,CRITICAL,HIGH
           exit_code: 0
