@@ -14,7 +14,7 @@ jobs:
         with:
             path: .
             base: master
-            extra_args: --log-level=2 --json --no-update
+            extra_args: --log-level=2 --json
 
       - name: Upload TruffleHog Results
         uses: actions/upload-artifact@v4
