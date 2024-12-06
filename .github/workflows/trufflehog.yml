@@ -1,0 +1,24 @@
+on: workflow_dispatch
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+
+      - name: TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+            path: .
+            base: master
+            extra_args: --log-level=2 --results=verified,unknown --json-output=trufflehog-results.json
+
+      - name: Upload TruffleHog Results
+        uses: actions/upload-artifact@v4
+        with:
+            name: trufflehog-results
+            path: trufflehog-results.json
+      
