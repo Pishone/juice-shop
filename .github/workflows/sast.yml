@@ -16,3 +16,4 @@ jobs:
                 tenant_id: ${{ secrets.TENANT_ID }}
                 accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
                 label: "sastgh"
+                sonar_project_key: "juice-shop"
