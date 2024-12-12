@@ -1,5 +1,5 @@
 
-name: DO Container Scan (SANITY)
+name: Container Scan (SANITY)
 
 on:
   workflow_dispatch:
@@ -14,8 +14,9 @@ jobs:
       - name: Run AccuKnox CSPM Scan
         uses: accuknox/container-scan-action@v0.0.1
         with:
-          endpoint: ${{ secrets.DO_ENDPOINT }}
-          token: ${{ secrets.DO_TOKEN }} 
-          tenant_id: ${{ secrets.DO_TENANT_ID }}
+          endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          token: ${{ secrets.ACCUKNOX_TOKEN }} 
+          tenant_id: ${{ secrets.TENANT_ID }}
           repository_name: ${{ github.repository }}
+          label: "trivyCICD"
           
