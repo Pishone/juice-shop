@@ -2,13 +2,14 @@ name: TruffleHog
 on: workflow_dispatch
   
 jobs:
-  test:
+  truffle:
     runs-on: ubuntu-latest
+    environment: Dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-            fetch-depth: 0
+          fetch-depth: 0
 
       - name: Run TruffleHog
         run: |
