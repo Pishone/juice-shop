@@ -1,5 +1,5 @@
 name: TruffleHog
-on: workflow_dispatch
+on: pull_request
   
 jobs:
   truffle:
@@ -11,9 +11,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set Branches
+        id: branches
+        run: |
+          echo "BASE_BRANCH=${{ github.event.pull_request.base.ref }}" >> $GITHUB_ENV
+          echo "HEAD_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+    
       - name: Run TruffleHog
         run: |
-          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest git file://. --since-commit master --branch HEAD --fail --json > trufflehog-results.json
+          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest git file:///pwd \
+          --since-commit $BASE_BRANCH \
+          --branch $HEAD_BRANCH \
+          --json > trufflehog-results.json
 
       - name: Upload TruffleHog results
         uses: actions/upload-artifact@v3
