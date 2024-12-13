@@ -1,0 +1,20 @@
+name: trufflehog trial
+on: workflow_dispatch
+
+jobs:
+  truffle:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Accuknox Secret Scan
+        uses: pishone-accuknox/secret-scan-action@v1.0
+        with:
+          endpoint: ${{ secrets.CSPM_URL }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          label: ${{ vars.LABEL_ID }}
+          token: ${{ secrets.CSPM_TOKEN }}
