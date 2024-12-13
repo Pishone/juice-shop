@@ -9,12 +9,9 @@ jobs:
         with:
             fetch-depth: 0
 
-      - name: TruffleHog
-        uses: trufflesecurity/trufflehog@main
-        with:
-            path: .
-            base: master
-            extra_args: --json > trufflehog-results.json
+      - name: Install Docker Img
+        run: |
+          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest file /pwd --json > trufflehog-results.json
 
       - name: Upload TruffleHog Results
         uses: actions/upload-artifact@v4
