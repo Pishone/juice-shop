@@ -13,12 +13,11 @@ jobs:
 
       - name: Run TruffleHog
         run: |
-          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest filesystem /pwd --json > trufflehog-results.json
+          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest git file://. --since-commit master --branch HEAD --fail --json > trufflehog-results.json
 
-      - name: Push file using Artifact API
-        run: |
-          curl --location 'https://${{ secrets.CSPM_URL }}/api/v1/artifact/?tenant_id=${{ secrets.TENANT_ID }}&data_type=TruffleHog&save_to_s3=true&label_id=${{ vars.LABEL_ID }}' \
-            --header 'Tenant-Id: ${{ secrets.TENANT_ID }}' \
-            --header 'Authorization: Bearer ${{ secrets.CSPM_TOKEN }}' \
-            --form 'file=@./trufflehog-results.json'
-      
+      - name: Upload TruffleHog results
+        uses: actions/upload-artifact@v3
+        with:
+          name: trufflehog-results
+          path: trufflehog-results.json
+        
