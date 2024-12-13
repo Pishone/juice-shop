@@ -17,7 +17,7 @@ jobs:
 
       - name: Push file using Artifact API
         run: |
-          curl --location '${{ secrets.CSPM_URL }}/api/v1/artifact/?tenant_id=${{ secrets.TENANT_ID }}&data_type=TruffleHog&save_to_s3=true&label_id=${{ vars.LABEL_ID }}' \
+          curl --location 'https://${{ secrets.CSPM_URL }}/api/v1/artifact/?tenant_id=${{ secrets.TENANT_ID }}&data_type=TruffleHog&save_to_s3=true&label_id=${{ vars.LABEL_ID }}' \
             --header 'Tenant-Id: ${{ secrets.TENANT_ID }}' \
             --header 'Authorization: Bearer ${{ secrets.CSPM_TOKEN }}' \
             --form 'file=@./trufflehog-results.json'
