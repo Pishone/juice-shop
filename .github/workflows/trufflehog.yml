@@ -11,7 +11,7 @@ jobs:
 
       - name: Install Docker Img
         run: |
-          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest file /pwd --json > raw-trufflehog-results.json
+          docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest filesystem /pwd --json > raw-trufflehog-results.json
           echo "[" > trufflehog-results.json
           sed 's/}{/},\n{/g' raw-trufflehog-results.json >> trufflehog-results.json
           echo "]" >> trufflehog-results.json
