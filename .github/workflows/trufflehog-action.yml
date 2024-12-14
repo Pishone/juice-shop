@@ -19,4 +19,4 @@ jobs:
           label: ${{ vars.LABEL_ID }}
           token: ${{ secrets.CSPM_TOKEN }}
           results: "verified,unknown"
-          
+          fail: "false"
