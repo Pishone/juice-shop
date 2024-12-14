@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
           
       - name: Accuknox Secret Scan
-        uses: pishone-accuknox/secret-scan-action@v1.1
+        uses: pishone-accuknox/secret-scan-action@v1.2
         with:
           endpoint: ${{ secrets.CSPM_URL }}
           tenant_id: ${{ secrets.TENANT_ID }}
