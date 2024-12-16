@@ -26,5 +26,5 @@ jobs:
           tenant_id: ${{ secrets.TENANT_ID }}
           label: ${{ vars.LABEL_ID }}
           token: ${{ secrets.CSPM_TOKEN }}
-          results: "verified,unknown"
           fail: "false"
+          args: "-x /pwd/exclude-paths.txt"
