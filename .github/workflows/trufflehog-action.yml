@@ -20,7 +20,7 @@ jobs:
           ref: ${{ github.head_ref }}
           
       - name: Accuknox Secret Scan
-        uses: pishone-accuknox/secret-scan-action@v1.2
+        uses: pishone-accuknox/secret-scan-action@v1.2.1
         with:
           endpoint: ${{ secrets.CSPM_URL }}
           tenant_id: ${{ secrets.TENANT_ID }}
@@ -28,3 +28,4 @@ jobs:
           token: ${{ secrets.CSPM_TOKEN }}
           results: "verified,unknown"
           fail: "false"
+          args: "-x /pwd/exclude-paths.txt"
