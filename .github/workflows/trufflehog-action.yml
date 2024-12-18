@@ -1,11 +1,7 @@
 name: trufflehog trial
 on: 
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  schedule:
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -20,11 +16,12 @@ jobs:
           ref: ${{ github.head_ref }}
           
       - name: Accuknox Secret Scan
-        uses: pishone-accuknox/secret-scan-action@v1.2.1
+        uses: pishone-accuknox/secret-scan-action@v1.2.5
         with:
           endpoint: ${{ secrets.CSPM_URL }}
           tenant_id: ${{ secrets.TENANT_ID }}
           label: ${{ vars.LABEL_ID }}
           token: ${{ secrets.CSPM_TOKEN }}
           fail: "false"
-          args: "-x /pwd/exclude-paths.txt"
+          branch: ${{ github.ref_name }}
+          
