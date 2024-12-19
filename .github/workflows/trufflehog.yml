@@ -1,6 +1,5 @@
 name: TruffleHog
 on: 
-  push:
   workflow_dispatch:
   
 jobs:
