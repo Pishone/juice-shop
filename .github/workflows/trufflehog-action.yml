@@ -7,7 +7,7 @@ on:
 jobs:
   truffle:
     runs-on: ubuntu-latest
-    environment: Dev
+    environment: Stage
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
