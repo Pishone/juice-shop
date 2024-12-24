@@ -22,7 +22,7 @@ jobs:
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           cx_tenant: ${{ secrets.CX_TENANT }}
           additional_params: --report-format sarif --output-path .
-          
+
       - name: Upload file
         uses: actions/upload-artifact@v4
         with:
@@ -157,7 +157,14 @@ jobs:
 
       - name: Push SARIF file to CSPM panel
         run: |
-          curl --location '${{ secrets.CSPM_URL }}/api/v1/artifact/?tenant_id=${{ secrets.TENANT_ID }}&data_type=CX&save_to_s3=true&label_id=${{ secrets.LABEL_ID }}' \
-            --header 'Tenant-Id: ${{ secrets.TENANT_ID }}' \
-            --header 'Authorization: Bearer ${{ secrets.CSPM_TOKEN }}' \
-            --form 'file=@./tmp_sarif_with_snippets.sarif'
+          RESPONSE=$(curl --location 'https://${{ secrets.CSPM_URL }}/api/v1/artifact/?tenant_id=${{ secrets.TENANT_ID }}&data_type=CX&save_to_s3=true&label_id=${{ secrets.LABEL_ID }}' \
+              --header 'Tenant-Id: ${{ secrets.TENANT_ID }}' \
+              --header 'Authorization: Bearer ${{ secrets.CSPM_TOKEN }}' \
+              --form 'file=@./tmp_sarif_with_snippets.sarif')
+  
+              echo "Response: $RESPONSE"
+              if [[ "$RESPONSE" != *"File received successfully"* ]]; then
+                echo "Error: Failed to push report to CSPM panel"
+                exit 1
+              fi
+        shell: bash
