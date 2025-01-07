@@ -22,4 +22,4 @@ jobs:
           label: ${{ vars.LABEL_ID }}
           token: ${{ secrets.CSPM_TOKEN }}
           fail: "false"
-          
+          args: --no-verification
