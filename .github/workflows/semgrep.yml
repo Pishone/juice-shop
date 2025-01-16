@@ -7,7 +7,7 @@ jobs:
   semgrep-scan:
     name: Semgrep Security Scan
     runs-on: ubuntu-latest
-    env: Dev
+    environment: Dev
       
     steps:
       - name: Checkout code
