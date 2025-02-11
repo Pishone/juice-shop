@@ -7,6 +7,7 @@ on:
 jobs:
   juice-do-sanity:
     runs-on: ubuntu-latest
+    environment: Stage
     steps:
       - name: Checkout code
         uses: actions/checkout@main  
@@ -14,8 +15,8 @@ jobs:
       - name: Run AccuKnox CSPM Scan
         uses: accuknox/container-scan-action@v0.0.1
         with:
-          endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-          token: ${{ secrets.ACCUKNOX_TOKEN }} 
+          endpoint: ${{ secrets.CSPM_URL }}
+          token: ${{ secrets.CSPM_TOKEN }} 
           tenant_id: ${{ secrets.TENANT_ID }}
           repository_name: ${{ github.repository }}
           label: "trivyCICD"
