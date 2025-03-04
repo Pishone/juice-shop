@@ -1,7 +1,8 @@
 name: trufflehog
 on: 
   push:
-    branches: [ "master" ]
+    paths:
+      - .github/workflows/trufflehog-action.yml
   workflow_dispatch:
 
 jobs:

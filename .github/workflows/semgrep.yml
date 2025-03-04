@@ -1,5 +1,7 @@
 on:
   push:
+    paths:
+      - .github/workflows/semgrep.yml
   workflow_dispatch: {}
 
 name: Semgrep

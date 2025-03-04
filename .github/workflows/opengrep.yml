@@ -2,6 +2,8 @@ name: Opengrep
 
 on:
     push:
+        paths:
+            - .github/workflows/opengrep.yml
     workflow_dispatch:
 
 jobs:
