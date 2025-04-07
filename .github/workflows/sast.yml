@@ -6,25 +6,46 @@ on:
   workflow_dispatch:
 
 jobs:
-    accuknox-sast:
-      name: Stage Automation
-      runs-on: ubuntu-latest
-      environment: Stage
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+  stage-automation-sast:
+    name: Stage Automation
+    runs-on: ubuntu-latest
+    environment: Stage
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        - name: SAST scan
-          uses: accuknox/sast-scan-action@v1.0.1
-          with:
-            sonar_token: ${{ secrets.SONAR_TOKEN }}
-            sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
-            accuknox_endpoint: ${{ secrets.CSPM_URL }}
-            accuknox_token: ${{ secrets.CSPM_TOKEN }}
-            tenant_id: "5"
-            label: "sast"
-            sonar_project_key: "dvwa-jenkins"
-            input_soft_fail: false
-            skip_sonar_scan: false
-            upload_artifact: true
-            
+      - name: SAST scan
+        uses: accuknox/sast-scan-action@v1.0.1
+        with:
+          sonar_token: ${{ secrets.SONAR_TOKEN }}
+          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
+          accuknox_token: ${{ secrets.CSPM_TOKEN }}
+          tenant_id: "5"
+          label: "sast"
+          sonar_project_key: "dvwa-jenkins"
+          input_soft_fail: true
+          skip_sonar_scan: true
+          upload_artifact: true
+  accuknox97-sast:
+    name: accuknox97
+    runs-on: ubuntu-latest
+    environment: accuknox97
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: SAST scan
+        uses: accuknox/sast-scan-action@v1.0.1
+        with:
+          sonar_token: ${{ secrets.SONAR_TOKEN }}
+          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
+          accuknox_token: ${{ secrets.CSPM_TOKEN }}
+          tenant_id: "4"
+          label: "sonarqube"
+          sonar_project_key: "dvwa-jenkins"
+          input_soft_fail: true
+          skip_sonar_scan: true
+          upload_artifact: true
+          
