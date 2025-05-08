@@ -36,9 +36,9 @@ jobs:
         with:
           api_key: ${{ secrets.CX_API_KEY }}
           project_name: ${{ vars.CX_PROJECT_NAME }}
-          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
           tenant_id: ${{ secrets.TENANT_ID }}
-          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          ak_token: ${{ secrets.CSPM_TOKEN }}
           label_id: "checkmarx"
 
   send-to-demoAutomation:
