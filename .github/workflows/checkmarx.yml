@@ -42,7 +42,7 @@ jobs:
           label_id: "checkmarx"
 
   send-to-demoAutomation:
-    needs: scan
+    needs: send-to-stageAutomation
     runs-on: ubuntu-latest
     environment: Demo
     
@@ -61,7 +61,7 @@ jobs:
           label_id: "checkmarx"
 
   send-to-accuknox97:
-    needs: scan
+    needs: send-to-demoAutomation
     runs-on: ubuntu-latest
     environment: accuknox97
     
@@ -80,7 +80,7 @@ jobs:
           label_id: "checkmarx"
 
   send-to-demo21:
-    needs: scan
+    needs: send-to-accuknox97
     runs-on: ubuntu-latest
     environment: demo21
     
