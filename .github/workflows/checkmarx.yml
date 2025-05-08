@@ -22,4 +22,78 @@ jobs:
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           cx_tenant: accuknox-nfr
 
-  
+  send-to-stageAutomation:
+    needs: scan
+    runs-on: ubuntu-latest
+    environment: Stage
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Send to Stage Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: ${{ vars.CX_PROJECT_NAME }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
+
+  send-to-demoAutomation:
+    needs: scan
+    runs-on: ubuntu-latest
+    environment: Demo
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Send to Demo Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: ${{ vars.CX_PROJECT_NAME }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
+
+  send-to-accuknox97:
+    needs: scan
+    runs-on: ubuntu-latest
+    environment: accuknox97
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Send to accuknox97 Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: ${{ vars.CX_PROJECT_NAME }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
+
+  send-to-demo21:
+    needs: scan
+    runs-on: ubuntu-latest
+    environment: demo21
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Send to demo2.1 Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: ${{ vars.CX_PROJECT_NAME }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
