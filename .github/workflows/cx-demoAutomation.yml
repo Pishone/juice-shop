@@ -1,0 +1,23 @@
+name: CX Demo Automation
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+jobs:
+
+  send-to-demoAutomation:
+    runs-on: ubuntu-latest
+    environment: Demo
+    
+    steps:
+      - name: Send to Demo Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: ${{ vars.CX_PROJECT_NAME }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
