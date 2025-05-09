@@ -38,11 +38,8 @@ jobs:
           ak_token: ${{ secrets.CSPM_TOKEN }}
           label_id: "checkmarx"
 
-      - name: Sleep 1 min
-        run: sleep 60
-
   send-to-demoAutomation:
-    needs: send-to-stageAutomation
+    needs: scan
     runs-on: ubuntu-latest
     environment: Demo
     
@@ -57,11 +54,8 @@ jobs:
           ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
           label_id: "checkmarx"
 
-      - name: Sleep 1 min
-        run: sleep 60
-
   send-to-accuknox97:
-    needs: send-to-demoAutomation
+    needs: scan
     runs-on: ubuntu-latest
     environment: accuknox97
     
@@ -76,11 +70,8 @@ jobs:
           ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
           label_id: "checkmarx"
 
-      - name: Sleep 1 min
-        run: sleep 60
-
   send-to-demo21:
-    needs: send-to-accuknox97
+    needs: scan
     runs-on: ubuntu-latest
     environment: demo21
     
