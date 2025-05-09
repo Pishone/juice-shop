@@ -28,9 +28,6 @@ jobs:
     environment: Stage
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Send to Stage Environment
         uses: accuknox/checkmarx-accuknox-action@v1.0.0
         with:
@@ -41,15 +38,15 @@ jobs:
           ak_token: ${{ secrets.CSPM_TOKEN }}
           label_id: "checkmarx"
 
+      - name: Sleep 1 min
+        run: sleep 60
+
   send-to-demoAutomation:
     needs: send-to-stageAutomation
     runs-on: ubuntu-latest
     environment: Demo
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Send to Demo Environment
         uses: accuknox/checkmarx-accuknox-action@v1.0.0
         with:
@@ -60,15 +57,15 @@ jobs:
           ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
           label_id: "checkmarx"
 
+      - name: Sleep 1 min
+        run: sleep 60
+
   send-to-accuknox97:
     needs: send-to-demoAutomation
     runs-on: ubuntu-latest
     environment: accuknox97
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Send to accuknox97 Environment
         uses: accuknox/checkmarx-accuknox-action@v1.0.0
         with:
@@ -79,15 +76,15 @@ jobs:
           ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
           label_id: "checkmarx"
 
+      - name: Sleep 1 min
+        run: sleep 60
+
   send-to-demo21:
     needs: send-to-accuknox97
     runs-on: ubuntu-latest
     environment: demo21
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
       - name: Send to demo2.1 Environment
         uses: accuknox/checkmarx-accuknox-action@v1.0.0
         with:
