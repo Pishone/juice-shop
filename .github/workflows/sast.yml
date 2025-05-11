@@ -11,14 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: Stage
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: SAST scan
         uses: accuknox/sast-scan-action@v1.0.1
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          sonar_token: 12345
+          sonar_host_url: 12345
           accuknox_endpoint: ${{ secrets.CSPM_URL }}
           accuknox_token: ${{ secrets.CSPM_TOKEN }}
           tenant_id: "5"
@@ -33,17 +30,50 @@ jobs:
     runs-on: ubuntu-latest
     environment: accuknox97
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: SAST scan
         uses: accuknox/sast-scan-action@v1.0.1
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          sonar_token: 12345
+          sonar_host_url: 12345
           accuknox_endpoint: ${{ secrets.CSPM_URL }}
           accuknox_token: ${{ secrets.CSPM_TOKEN }}
           tenant_id: "4"
+          label: "sonarqube"
+          sonar_project_key: "dvwa-jenkins"
+          input_soft_fail: true
+          skip_sonar_scan: true
+
+  demo21-sast:
+    name: demo21
+    runs-on: ubuntu-latest
+    environment: demo21
+    steps:
+      - name: SAST scan
+        uses: accuknox/sast-scan-action@v1.0.1
+        with:
+          sonar_token: 12345
+          sonar_host_url: 12345
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          label: "sonarqube"
+          sonar_project_key: "dvwa-jenkins"
+          input_soft_fail: true
+          skip_sonar_scan: true
+
+  demo-automation-sast:
+    name: Demo Automation
+    runs-on: ubuntu-latest
+    environment: Demo
+    steps:
+      - name: SAST scan
+        uses: accuknox/sast-scan-action@v1.0.1
+        with:
+          sonar_token: 12345
+          sonar_host_url: 12345
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          tenant_id: ${{ secrets.TENANT_ID }}
           label: "sonarqube"
           sonar_project_key: "dvwa-jenkins"
           input_soft_fail: true
