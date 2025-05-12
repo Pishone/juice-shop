@@ -1,4 +1,4 @@
-name: Checkmarx
+name: Checkmarx vuln-db
 
 on:
   schedule:
