@@ -45,6 +45,7 @@ jobs:
           sonar_project_key: "juice-shop"
           input_soft_fail: true
           skip_sonar_scan: true
+          upload_artifact: false
 
   demo21-sast:
     name: demo21
@@ -64,6 +65,7 @@ jobs:
           sonar_project_key: "juice-shop"
           input_soft_fail: true
           skip_sonar_scan: true
+          upload_artifact: false
 
   demo-automation-sast:
     name: Demo Automation
@@ -83,4 +85,5 @@ jobs:
           sonar_project_key: "juice-shop"
           input_soft_fail: true
           skip_sonar_scan: true
+          upload_artifact: false
           
