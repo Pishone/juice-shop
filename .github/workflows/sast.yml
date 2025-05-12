@@ -29,6 +29,7 @@ jobs:
 
   accuknox97-sast:
     name: accuknox97
+    needs: stage-automation-sast
     runs-on: ubuntu-latest
     environment: accuknox97
     steps:
@@ -47,6 +48,7 @@ jobs:
 
   demo21-sast:
     name: demo21
+    needs: accuknox97-sast
     runs-on: ubuntu-latest
     environment: demo21
     steps:
@@ -65,6 +67,7 @@ jobs:
 
   demo-automation-sast:
     name: Demo Automation
+    needs: demo21-sast
     runs-on: ubuntu-latest
     environment: Demo
     steps:
