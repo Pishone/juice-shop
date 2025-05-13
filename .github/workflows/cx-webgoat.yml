@@ -1,0 +1,68 @@
+name: Checkmarx WebGoat
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  send-to-stageAutomation:
+    runs-on: ubuntu-latest
+    environment: Stage
+    
+    steps:
+      - name: Send to Stage Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: udit-uniyal/WebGoat
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.CSPM_TOKEN }}
+          label_id: "checkmarx"
+          upload_artifact: true
+
+  send-to-demoAutomation:
+    runs-on: ubuntu-latest
+    environment: Demo
+    
+    steps:
+      - name: Send to Demo Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: udit-uniyal/WebGoat
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
+
+  send-to-accuknox97:
+    runs-on: ubuntu-latest
+    environment: accuknox97
+    
+    steps:
+      - name: Send to accuknox97 Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: udit-uniyal/WebGoat
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
+
+  send-to-demo21:
+    runs-on: ubuntu-latest
+    environment: demo21
+    
+    steps:
+      - name: Send to demo2.1 Environment
+        uses: accuknox/checkmarx-accuknox-action@v1.0.0
+        with:
+          api_key: ${{ secrets.CX_API_KEY }}
+          project_name: udit-uniyal/WebGoat
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          tenant_id: ${{ secrets.TENANT_ID }}
+          ak_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          label_id: "checkmarx"
