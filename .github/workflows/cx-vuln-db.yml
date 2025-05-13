@@ -20,6 +20,7 @@ jobs:
           tenant_id: ${{ secrets.TENANT_ID }}
           ak_token: ${{ secrets.CSPM_TOKEN }}
           label_id: "checkmarx"
+          upload_artifact: true
 
   send-to-demoAutomation:
     runs-on: ubuntu-latest
