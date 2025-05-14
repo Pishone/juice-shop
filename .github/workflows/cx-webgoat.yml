@@ -21,6 +21,7 @@ jobs:
           ak_token: ${{ secrets.CSPM_TOKEN }}
           label_id: "checkmarx"
           upload_artifact: true
+          main_branch: true
 
   send-to-demoAutomation:
     runs-on: ubuntu-latest
