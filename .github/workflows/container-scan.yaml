@@ -18,7 +18,7 @@ jobs:
           accuknox_token: ${{ secrets.CSPM_TOKEN }}
           accuknox_label: "dogfooding"
           accuknox_endpoint: ${{ secrets.CSPM_URL }}
-          image_name: "bkimminich/juice-shop"
+          image_name: "pishone/juice-shop"
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
           soft_fail: false
           keep_results: true
