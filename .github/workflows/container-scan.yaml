@@ -15,9 +15,9 @@ jobs:
       - name: Run AccuKnox CSPM Scan
         uses: accuknox/container-scan-action@latest
         with:
-          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_token: ${{ secrets.CSPM_TOKEN }}
           accuknox_label: "dogfooding"
-          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
           image_name: "pishone/juice-shop"
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
           soft_fail: false
