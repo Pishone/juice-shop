@@ -1,23 +1,27 @@
 
-name: Container Scan (SANITY)
+name: Container Scan (SBOM)
 
 on:
   workflow_dispatch:
 
 jobs:
-  juice-do-sanity:
+  juice-sbom:
     runs-on: ubuntu-latest
     environment: Stage
     steps:
       - name: Checkout code
-        uses: actions/checkout@main  
+        uses: actions/checkout@main
      
       - name: Run AccuKnox CSPM Scan
-        uses: accuknox/container-scan-action@v0.0.1
+        uses: accuknox/container-scan-action@latest
         with:
-          endpoint: ${{ secrets.CSPM_URL }}
-          token: ${{ secrets.CSPM_TOKEN }} 
-          tenant_id: ${{ secrets.TENANT_ID }}
-          repository_name: ${{ github.repository }}
-          label: "trivyCICD"
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_label: "dogfooding"
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          image_name: "pishone/juice-shop"
+          severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
+          soft_fail: false
+          keep_results: true
+          generate_sbom: true
+          project_name: "Juice Shop"
           
