@@ -23,5 +23,5 @@ jobs:
           soft_fail: false
           keep_results: true
           generate_sbom: true
-          project_name: "Juice Shop"
+          project_name: "Juice-Shop"
           
