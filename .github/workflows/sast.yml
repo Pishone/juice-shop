@@ -1,19 +1,42 @@
-name: Accuknox SAST trial
-on: workflow_dispatch
-jobs:
-    accuknox-sast:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v4
+name: Opengrep
 
-          - name: Only Required
-            uses: udit-uniyal/accuknox-sast@v1.0.0
-            with:
-                sonar_token: ${{ secrets.SONAR_TOKEN }}
-                sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
-                accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-                tenant_id: ${{ secrets.TENANT_ID }}
-                accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-                label: "sastgh"
-                sonar_project_key: "juice-shop"
+on:
+  workflow_dispatch:
+
+jobs:
+  accuknox-cicd-not-master:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: not-master
+
+      - name: "Run Accuknox SAST: Opengrep"
+        uses: accuknox/sast-scan-opengrep-action@latest
+        with:
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_label: "opengrep1"
+          accuknox_ai_analysis: "false"
+          soft_fail: "true"
+
+  accuknox-cicd-master:
+    needs: accuknox-cicd-not-master
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: master
+
+      - name: "Run Accuknox SAST: Opengrep"
+        uses: accuknox/sast-scan-opengrep-action@latest
+        with:
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_label: "opengrep2"
+          accuknox_ai_analysis: "false"
+          soft_fail: "true"
