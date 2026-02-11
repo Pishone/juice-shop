@@ -23,7 +23,7 @@ jobs:
           soft_fail: "true"
 
   accuknox-cicd-production:
-    needs: accuknox-cicd-not-master
+    needs: accuknox-cicd-master
     runs-on: ubuntu-latest
     environment: Dev1
     steps:
