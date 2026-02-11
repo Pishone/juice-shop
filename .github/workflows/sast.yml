@@ -1,89 +1,42 @@
-name: SQ
+name: Opengrep not-master
+
 on:
-  schedule:
-    - cron: '30 1 * * *'
-  push:
-    paths:
-      - .github/workflows/sast.yml
   workflow_dispatch:
 
 jobs:
-  stage-automation-sast:
-    name: Stage Automation
+  accuknox-cicd-not-master:
     runs-on: ubuntu-latest
-    environment: Stage
+    environment: Dev
     steps:
-      - name: SAST scan
-        uses: accuknox/sast-scan-action@v1.0.1
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
-          accuknox_endpoint: ${{ secrets.CSPM_URL }}
-          accuknox_token: ${{ secrets.CSPM_TOKEN }}
-          tenant_id: "5"
-          label: "sast"
-          sonar_project_key: "juice-shop"
-          input_soft_fail: true
-          skip_sonar_scan: true
-          upload_artifact: true
+          ref: not-master
 
-  accuknox97-sast:
-    name: accuknox97
-    needs: stage-automation-sast
-    runs-on: ubuntu-latest
-    environment: accuknox97
-    steps:
-      - name: SAST scan
-        uses: accuknox/sast-scan-action@v1.0.1
+      - name: "Run Accuknox SAST: Opengrep"
+        uses: accuknox/sast-scan-opengrep-action@latest
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          tenant_id: "4"
-          label: "sonarqube"
-          sonar_project_key: "juice-shop"
-          input_soft_fail: true
-          skip_sonar_scan: true
-          upload_artifact: false
+          accuknox_label: "opengrep1"
+          accuknox_ai_analysis: "false"
+          soft_fail: "true"
 
-  demo21-sast:
-    name: demo21
-    needs: accuknox97-sast
+  accuknox-cicd-master:
+    needs: accuknox-cicd-not-master
     runs-on: ubuntu-latest
-    environment: demo21
+    environment: Dev
     steps:
-      - name: SAST scan
-        uses: accuknox/sast-scan-action@v1.0.1
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          ref: master
+
+      - name: "Run Accuknox SAST: Opengrep"
+        uses: accuknox/sast-scan-opengrep-action@latest
+        with:
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          tenant_id: ${{ secrets.TENANT_ID }}
-          label: "sonarqube"
-          sonar_project_key: "juice-shop"
-          input_soft_fail: true
-          skip_sonar_scan: true
-          upload_artifact: false
-
-  demo-automation-sast:
-    name: Demo Automation
-    needs: demo21-sast
-    runs-on: ubuntu-latest
-    environment: Demo
-    steps:
-      - name: SAST scan
-        uses: accuknox/sast-scan-action@v1.0.1
-        with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
-          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
-          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
-          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          tenant_id: ${{ secrets.TENANT_ID }}
-          label: "sonarqube"
-          sonar_project_key: "juice-shop"
-          input_soft_fail: true
-          skip_sonar_scan: true
-          upload_artifact: false
-          
+          accuknox_label: "opengrep2"
+          accuknox_ai_analysis: "false"
+          soft_fail: "true"
