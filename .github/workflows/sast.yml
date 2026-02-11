@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  accuknox-cicd-not-master:
+  accuknox-cicd-master:
     runs-on: ubuntu-latest
     environment: Dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          ref: not-master
+          ref: master
 
       - name: "Run Accuknox SAST: Opengrep"
         uses: accuknox/sast-scan-opengrep-action@latest
@@ -22,15 +22,15 @@ jobs:
           accuknox_ai_analysis: "false"
           soft_fail: "true"
 
-  accuknox-cicd-master:
+  accuknox-cicd-production:
     needs: accuknox-cicd-not-master
     runs-on: ubuntu-latest
-    environment: Dev
+    environment: Dev1
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          ref: master
+          ref: production
 
       - name: "Run Accuknox SAST: Opengrep"
         uses: accuknox/sast-scan-opengrep-action@latest
