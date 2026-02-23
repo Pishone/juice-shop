@@ -10,18 +10,20 @@ jobs:
     environment: Stage
     steps:
       - name: Checkout code
-        uses: actions/checkout@main
+        uses: actions/checkout@v6
      
       - name: Run AccuKnox CSPM Scan
-        uses: accuknox/container-scan-action@latest
+        uses: Pishone/container-scan-action@v1.0.0
         with:
-          accuknox_token: ${{ secrets.CSPM_TOKEN }}
-          accuknox_label: "dogfooding"
-          accuknox_endpoint: ${{ secrets.CSPM_URL }}
-          image_name: "pishone/juice-shop"
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          image_name: "test-nginx"
+          tag: "latest"
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
-          soft_fail: false
-          keep_results: true
+          soft_fail: true
+          upload_results: true
           generate_sbom: true
-          project_name: "Juice-Shop"
+          dockerfile_context: Dockerfile
+          project_name: "Juice Shop"
           
