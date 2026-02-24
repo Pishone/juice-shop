@@ -15,9 +15,9 @@ jobs:
       - name: Run AccuKnox CSPM Scan
         uses: Pishone/container-scan-action@v1.0.0
         with:
-          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
-          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_token: ${{ secrets.CSPM_TOKEN }}
+          accuknox_label: 'SBOM'
+          accuknox_endpoint: ${{ secrets.CSPM_URL }}
           image_name: "test-nginx"
           tag: "latest"
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
