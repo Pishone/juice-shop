@@ -13,13 +13,13 @@ jobs:
         uses: actions/checkout@v6
      
       - name: Run AccuKnox CSPM Scan
-        uses: Pishone/container-scan-action@v2.0.0
+        uses: accuknox/container-scan-action@latest
         with:
           accuknox_token: ${{ secrets.CSPM_TOKEN }}
           accuknox_label: 'SBOM'
           accuknox_endpoint: ${{ secrets.CSPM_URL }}
-          image_name: "test-nginx"
-          tag: "latest"
+          image_name: "nginx"
+          tag: "not-latest"
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
           soft_fail: true
           upload_results: true
