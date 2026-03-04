@@ -7,7 +7,7 @@ on:
 jobs:
   juice-sbom:
     runs-on: ubuntu-latest
-    environment: Stage
+    environment: Demo
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -15,11 +15,11 @@ jobs:
       - name: Run AccuKnox CSPM Scan
         uses: accuknox/container-scan-action@latest
         with:
-          accuknox_token: ${{ secrets.CSPM_TOKEN }}
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
           accuknox_label: 'SBOM'
-          accuknox_endpoint: ${{ secrets.CSPM_URL }}
-          image_name: "nginx"
-          tag: "not-latest"
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          image_name: "juice-Shop"
+          tag: ${{ github.sha }}
           severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
           soft_fail: true
           upload_results: true
