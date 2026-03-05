@@ -1,0 +1,29 @@
+
+name: Container Scan (SBOM)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  juice-sbom:
+    runs-on: ubuntu-latest
+    environment: Demo
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+     
+      - name: Run AccuKnox CSPM Scan
+        uses: accuknox/container-scan-action@latest
+        with:
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          accuknox_label: 'SBOM'
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          image_name: "juice-shop"
+          tag: ${{ github.sha }}
+          severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
+          soft_fail: true
+          upload_results: true
+          generate_sbom: true
+          dockerfile_context: Dockerfile
+          project_name: "Juice Shop"
+          
