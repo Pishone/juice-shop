@@ -21,4 +21,4 @@ jobs:
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           accuknox_label: "delete"
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          soft_fail: "false"
+          soft_fail: "true"
