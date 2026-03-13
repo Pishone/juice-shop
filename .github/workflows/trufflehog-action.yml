@@ -16,10 +16,9 @@ jobs:
           fetch-depth: 0
           
       - name: Accuknox Secret Scan
-        uses: accuknox/secret-scan-action@v1.0.0
+        uses: Pishone/secret-scan-action@test
         with:
-          endpoint: ${{ secrets.CSPM_URL }}
-          tenant_id: ${{ secrets.TENANT_ID }}
-          label: ${{ vars.LABEL_ID }}
-          token: ${{ secrets.CSPM_TOKEN }}
-          fail: "false"
+          accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
+          accuknox_label: "delete"
+          accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
+          soft_fail: "false"
