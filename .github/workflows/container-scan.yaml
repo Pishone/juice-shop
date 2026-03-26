@@ -25,5 +25,5 @@ jobs:
           upload_results: true
           generate_sbom: true
           dockerfile_context: Dockerfile
-          project_name: "Juice Shop"
+          project_name: "Juice Shop 2"
           
