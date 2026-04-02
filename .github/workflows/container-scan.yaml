@@ -7,7 +7,7 @@ on:
 jobs:
   juice-sbom:
     runs-on: ubuntu-latest
-    environment: Stage
+    environment: Production
     steps:
       - name: Checkout code
         uses: actions/checkout@main
