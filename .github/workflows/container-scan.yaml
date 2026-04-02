@@ -16,7 +16,7 @@ jobs:
         uses: Pishone/container-scan-action@v1.0.0
         with:
           accuknox_token: ${{ secrets.ACCUKNOX_TOKEN }}
-          accuknox_label: ${{ secrets.ACCUKNOX_LABEL }}
+          accuknox_label: "SBOM"
           accuknox_endpoint: ${{ secrets.ACCUKNOX_ENDPOINT }}
           image_name: "test-nginx"
           tag: "latest"
